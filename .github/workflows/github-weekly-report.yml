@@ -2,8 +2,8 @@ name: GitHub Weekly Report - Trending + Pépites
 
 on:
   schedule:
-    - cron: '0 8 * * 1'        # Tous les lundis à 8h du matin (heure UTC)
-  workflow_dispatch:           # Permet de lancer manuellement pour tester
+    - cron: '0 8 * * 1'        # Tous les lundis à 8h UTC
+  workflow_dispatch:           # Pour tester manuellement
 
 jobs:
   generate-report:
@@ -24,7 +24,6 @@ jobs:
 
       - name: Run GitHub Reporter
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python github_reporter.py
