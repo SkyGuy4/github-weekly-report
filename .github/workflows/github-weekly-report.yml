@@ -1,0 +1,30 @@
+name: GitHub Weekly Report - Trending + Pépites
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'        # Tous les lundis à 8h du matin (heure UTC)
+  workflow_dispatch:           # Permet de lancer manuellement pour tester
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 python-telegram-bot
+
+      - name: Run GitHub Reporter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python github_reporter.py
