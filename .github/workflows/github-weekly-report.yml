@@ -2,8 +2,8 @@ name: GitHub Weekly Report - Trending + Pépites
 
 on:
   schedule:
-    - cron: '0 8 * * 1'        # Tous les lundis à 8h UTC
-  workflow_dispatch:           # Pour tester manuellement
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
 
 jobs:
   generate-report:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 python-telegram-bot
+          pip install requests beautifulsoup4
 
       - name: Run GitHub Reporter
         env:
